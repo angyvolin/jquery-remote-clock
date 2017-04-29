@@ -94,7 +94,8 @@
     };
 
     RemoteClock.prototype.destroy = function () {
-        clearInterval(this.timeout);
+        clearInterval(this.tickTimeout);
+        clearInterval(this.syncTimeout);
         this.$element.off('click').removeData(this.type);
         if (null !== this.$clock) {
             this.$clock.detach();
