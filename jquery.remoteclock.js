@@ -28,7 +28,7 @@
         syncInterval: 10000,
         template: '<span class="time">88:88:88</span>',
         selector: '.time',
-        parser: Date
+        parser: Date.parse
     };
 
     RemoteClock.prototype.init = function (type, element, options) {
