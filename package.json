@@ -5,7 +5,7 @@
   "main": "jquery.remoteclock.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/angyvolin/jquery-remote-clock.git"
+    "url": "git+ssh://git@github.com/angyvolin/jquery-remote-clock.git"
   },
   "dependencies": {
     "jquery": "^2.2"
