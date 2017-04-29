@@ -37,7 +37,7 @@ $('.server-time-clock').remoteClock({
 
 ```javascript
 $('.server-time-clock').remoteClock({
-    url: 'http://api.geonames.org/timezoneJSON?lat=51.5034070&lng=-0.1275920&username=angyvolin&filter=time',
+    url: '/time',
     parser: function (data) {
         return Date.parse(data.time);
     }

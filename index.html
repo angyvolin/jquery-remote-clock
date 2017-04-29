@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>jQuery Remote Clock demo</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="jquery.remoteclock.min.js"></script>
+    <style>
+        body {background-color: #ccc;}
+        section {overflow: hidden; margin-bottom: 50px;}
+        pre {display: block; margin-left: -130px; height: 200px; background: transparent; border: none;}
+        .demo-clock-holder-1 {font-size: 4em; font-weight: bold; font-family: "Lucida Console", Monaco, monospace;}
+        .demo-clock-holder-1 i {font-size: 0.9em;}
+        .example {border: solid 1px #fff;}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="col-md-6">jQuery Remote Clock</h1>
+
+        <div class="col-md-6 demo-clock-holder-1"></div>
+
+        <section class="col-md-6" title="Basic usage">
+            <h2>Basic usage</h2>
+
+            <div class="example">
+                <pre>
+                    &lt;div class="demo-clock-holder-1"&gt;&lt;/div&gt;
+
+                    &lt;script&gt;
+                        $('.demo-clock-holder-1').remoteClock({
+                            url: '/time'
+                        });
+                    &lt;/script&gt;
+                </pre>
+            </div>
+        </section>
+
+        <section class="col-md-6" title="Change sync interval">
+            <h2>Change sync interval</h2>
+
+            <div class="example">
+                <pre>
+                    &lt;div class="demo-clock-holder-2"&gt;&lt;/div&gt;
+
+                    &lt;script&gt;
+                        $('.demo-clock-holder-2').remoteClock({
+                            url: '/time',
+                            syncInterval: 60000
+                        });
+                    &lt;/script&gt;
+                </pre>
+            </div>
+        </section>
+
+        <section class="col-md-6" title="customize widget template">
+            <h2>Customize widget template</h2>
+
+            <div class="example">
+                <pre>
+                    &lt;div class="demo-clock-holder-3"&gt;&lt;/div&gt;
+
+                    &lt;script&gt;
+                        $('.demo-clock-holder-3').remoteClock({
+                            url: '/time',
+                            template: '&lt;i class="glyphicon glyphicon-time"&gt;&lt;/i&gt;'
+                                    + '&lt;span class="time"&gt&lt/span&gt;'
+                        });
+                    &lt;/script&gt;
+                </pre>
+            </div>
+        </section>
+
+        <section class="col-md-6" title="use custom time parser">
+            <h2>Use custom time parser</h2>
+
+            <div class="example">
+                <pre>
+                    &lt;div class="demo-clock-holder-4"&gt;&lt;/div&gt;
+
+                    &lt;script&gt;
+                        $('.demo-clock-holder-4').remoteClock({
+                            url: '/time',
+                            parser: function (data) {
+                                return Date.parse(data.time);
+                            }
+                        });
+                    &lt;/script&gt;
+                </pre>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        $(function () {
+            $('.demo-clock-holder-1').remoteClock({
+                url: 'http://api.geonames.org/timezoneJSON?lat=51.5034070&lng=-0.1275920&username=angyvolin',
+                syncInterval: 60000,
+                template: '<i class="glyphicon glyphicon-time" aria-hidden="true"></i> <span class="time"></span>',
+                parser: function (data) {
+                    return Date.parse(data.time);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
