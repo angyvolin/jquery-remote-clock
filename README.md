@@ -1,4 +1,5 @@
 # jquery-remote-clock
+
 Turns given div element into simple clock displaying remote time.
 
 ## basic usage
@@ -9,15 +10,36 @@ Turns given div element into simple clock displaying remote time.
 
 ```javascript
 $('.clock-holder').remoteClock({
-    url: '/time.php'
+    url: '/time'
 });
 ```
 
-## pass sync interval
+## change sync interval
 
 ```javascript
 $('.clock-holder').remoteClock({
-    url: '/time.php',
+    url: '/time',
     syncInterval: 30000
+});
+```
+
+## customize widget template
+
+```javascript
+$('.server-time-clock').remoteClock({
+    url: '/time',
+    template: '<i class="fa fa-clock-o" aria-hidden="true"></i> <span class="time">88:88:88</span>'
+});
+```
+
+
+## use custom time parser
+
+```javascript
+$('.server-time-clock').remoteClock({
+    url: 'http://api.geonames.org/timezoneJSON?lat=51.5034070&lng=-0.1275920&username=angyvolin&filter=time',
+    parser: function (data) {
+        return Date.parse(data.time);
+    }
 });
 ```
