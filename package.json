@@ -1,6 +1,6 @@
 {
   "name": "jquery-remote-clock",
-  "version": "0.3.0",
+  "version": "1.0.0",
   "description": "Turns given div element into simple clock displaying remote time.",
   "main": "jquery.remoteclock.js",
   "repository": {
@@ -27,7 +27,7 @@
     "url": "https://github.com/angyvolin/jquery-remote-clock/issues"
   },
   "scripts": {
-    "build": "uglifyjs jquery.remoteclock.js > jquery.remoteclock.min.js"
+    "build": "uglifyjs jquery.remoteclock.js -co jquery.remoteclock.min.js --mangle-props 1"
   },
   "homepage": "https://github.com/angyvolin/jquery-remote-clock#readme"
 }
