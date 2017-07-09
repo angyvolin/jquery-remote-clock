@@ -7,7 +7,7 @@
  */
 
 (function (factory) {
-    if ( typeof define === 'function' && define.amd ) {
+    if (typeof define === 'function' && define.amd) {
         // AMD. Register as an anonymous module.
         define(['jquery'], factory);
     } else if (typeof exports === 'object') {
@@ -23,7 +23,6 @@
     var RemoteClock = function (element, options) {
         this.type = null;
         this.options = null;
-        this.paused = false;
         this.tickTimeout = null;
         this.syncTimeout = null;
         this.diff = 0;
@@ -32,8 +31,6 @@
         this.parser = null;
 
         this.init('remoteClock', element, options);
-
-        this.$element.on('click', $.proxy(this.toggle, this));
     };
 
     RemoteClock.VERSION = '1.0.0';
@@ -53,7 +50,6 @@
         this.options = $.extend({}, RemoteClock.DEFAULTS, options || {});
         this.$element = $(element).append(this.options.template);
         this.$clock = this.$element.find(this.options.selector);
-        this.paused = 'true' === localStorage.getItem(this.type + '.paused');
         this.setParser(this.options.parser);
         this.sync();
     };
@@ -68,18 +64,6 @@
         }
     };
 
-    RemoteClock.prototype.toggle = function () {
-        this.paused = !this.paused;
-        localStorage.setItem(this.type + '.paused', this.paused);
-
-        if (this.paused) {
-            clearTimeout(this.tickTimeout);
-            clearTimeout(this.syncTimeout);
-        } else {
-            this.sync();
-        }
-    };
-
     RemoteClock.prototype.sync = function () {
         var self = this;
 
@@ -91,10 +75,7 @@
         }).done(function (serverTime) {
             self.diff = self.parser(serverTime) - Date.now();
             self.tick.apply(self);
-
-            if (!this.paused) {
-                self.syncTimeout = setTimeout($.proxy(self.sync, self), self.options.syncInterval);
-            }
+            self.syncTimeout = setTimeout($.proxy(self.sync, self), self.options.syncInterval);
         });
     };
 
@@ -105,9 +86,7 @@
             new Date(Date.now() + this.diff).toTimeString().split(' ')[0]
         );
 
-        if (!this.paused) {
-            this.tickTimeout = setTimeout($.proxy(this.tick, this), RemoteClock.TICK_INTERVAL);
-        }
+        this.tickTimeout = setTimeout($.proxy(this.tick, this), RemoteClock.TICK_INTERVAL);
     };
 
     RemoteClock.prototype.destroy = function () {
