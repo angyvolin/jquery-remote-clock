@@ -1,5 +1,5 @@
 /*!
- * jQuery Remote Clock 0.3.0
+ * jQuery Remote Clock 1.0.0
  *
  * Author: Andrii Volin <angy.volin@gmail.com>
  * Released under the MIT license
