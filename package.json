@@ -1,6 +1,6 @@
 {
   "name": "jquery-remote-clock",
-  "version": "1.0.0",
+  "version": "0.3.1",
   "description": "Turns given div element into simple clock displaying remote time.",
   "main": "jquery.remoteclock.js",
   "repository": {
